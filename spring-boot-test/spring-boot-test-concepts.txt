@@ -1,0 +1,10 @@
+Unit testing from spring helps to test individual part of project(web->controller , data- > repository , business -> service classes)
+we can mock other dependent part eg service layer depending on data layer then we can mock data layer in unit test of service layer
+
+We could mock using stub for above case but that is not maintainable as for each methoid differnet scenraios will be there and we need to create that many stubvs
+also so many method mesans stubs will be big and certainly not maintainable
+Also if in future a new method comes in interface we will ave to add that method in 100s of stubs created already
+
+Better approach is to use stub
+
+The name of a class runnig for maven test should always end with Test/Tests otherwiese Maven skips the class
