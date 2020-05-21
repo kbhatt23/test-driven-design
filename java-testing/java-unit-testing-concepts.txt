@@ -1,0 +1,32 @@
+Unit testing goal is to test a unit of code (method/class)
+-> indepdent of other units just test one unit / set of units
+
+Junit can be used to automate the unit/integration testing and helps in saving time/effort of manual testing
+
+Even an empty test method succeeds in testing
+as only when failure happens or Assert fail is manually invoked or an assertion fails then the red bar comes in junit report
+
+@test works only with public void signature only other signature it throws exception
+maven picks classes ending with Test string only and other clases are skipped
+
+@before gets called before every @test method
+@after gets called after every @test method
+so before and after can be used to initalize the data and clean up the data before and after each test
+- eg is some sample data jpa test where each time before we setup some tables in repository
+  and after each method calls we remove that data so that before anothher test the data is stored back again
+ this helps in consistency as in any test data might be modified and this could cause issue in assertions
+
+@afterclass and @before class are called once per class 
+meaning @beforeclass will be called before @before and any other test case
+@after gets called after @after and any other test case
+
+In case any test case method is expected to throw exception we can put @Test(expected =Excelption.class)
+To test performace we can set time out if test of that method takes more that this it fails that specific unit test case
+eg @Test(timeout=100) -> 100 mili second
+
+Junit suite is needed to group tests togerther
+lets say there are 2 suites one normal and one for perfromace testing
+so awe do not want to test performace classes always
+so we create two suites one having business tests and other having performaces test and we can run only one suite
+
+We can manage the suite using maven sure fire plugin using includes configuration
