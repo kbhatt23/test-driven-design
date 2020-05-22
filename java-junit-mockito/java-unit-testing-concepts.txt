@@ -1,0 +1,60 @@
+Unit testing goal is to test a unit of code (method/class)
+-> indepdent of other units just test one unit / set of units
+
+Junit can be used to automate the unit/integration testing and helps in saving time/effort of manual testing
+
+Even an empty test method succeeds in testing
+as only when failure happens or Assert fail is manually invoked or an assertion fails then the red bar comes in junit report
+
+@test works only with public void signature only other signature it throws exception
+maven picks classes ending with Test string only and other clases are skipped
+
+@before gets called before every @test method
+@after gets called after every @test method
+so before and after can be used to initalize the data and clean up the data before and after each test
+- eg is some sample data jpa test where each time before we setup some tables in repository
+  and after each method calls we remove that data so that before anothher test the data is stored back again
+ this helps in consistency as in any test data might be modified and this could cause issue in assertions
+
+@afterclass and @before class are called once per class 
+meaning @beforeclass will be called before @before and any other test case
+@after gets called after @after and any other test case
+
+In case any test case method is expected to throw exception we can put @Test(expected =Excelption.class)
+To test performace we can set time out if test of that method takes more that this it fails that specific unit test case
+eg @Test(timeout=100) -> 100 mili second
+
+Junit suite is needed to group tests togerther
+lets say there are 2 suites one normal and one for perfromace testing
+so awe do not want to test performace classes always
+so we create two suites one having business tests and other having performaces test and we can run only one suite
+
+We can manage the suite using maven sure fire plugin using includes configuration
+
+Stubs can be used for mocking but it has disavantages:
+a. dynamic condition need to be added as if else -> like need to test sceanrio which return emppty list, list of string having string chars ert. 
+	-> so we need to create os many stubs for each scenario or need to add if else condition
+b. inheritance contract: if a new method comes in super we need to overidde this for all the stubs at som many places
+
+if when condition of mock bean is not met it returns default/happy values
+a. for object/clases -> null
+b. arrays -> arrays object with 0 size
+c. list/collection -> collection with 0 size
+d. boolean -> false
+e. integer -> 0
+
+BDD means behavior driven design
+This is process of managing system unit to create various scenarios that end user will face
+it breaks thing into given(current data setup) , when(input method), then(assertion) part
+
+
+@mock creates mock bean for dependency class and also inject to the class annotated with @injectMocks . Also the main class also get created and no need to call consustructor in code
+
+@captor annotaion can be used to create ArgumentCaptor instance and hence helping in writing less code
+
+@rule is enahncement to @runner as we cna have only one runner but can have multiple @rule to manage things in junit
+
+Spy is same as mock in all cases excepot cases when .mock method is not defined instead of happ/deault returns it actually calls rela methoid for mock class
+eg:
+mockList.add(23) ; syso(mockList.size()) will print 0
+but in case spyList.add(23) ; syso(spyList.size()) will print 1
